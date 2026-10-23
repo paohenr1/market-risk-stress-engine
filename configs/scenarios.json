@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "dataset_id": "spy_gz_monthly_average_v1",
+  "scenarios": [
+    {
+      "id": "financial_crisis_2008",
+      "version": 1,
+      "mode": "historical_replay",
+      "input_type": "observed_quarter_average_states",
+      "narrative": "Financial crisis and recession, using common quarterly-average states.",
+      "rationale": "NBER dates the monthly recession December 2007-June 2009. Our study spans 2007Q4-2009Q2 average states; origin overlaps recession onset. https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions",
+      "origin": "2007Q4",
+      "end": "2009Q2",
+      "horizon_quarters": 6,
+      "units": {
+        "equity_price_change": "percent",
+        "yield_2y_change": "basis_points",
+        "yield_10y_change": "basis_points",
+        "credit_spread_proxy_change": "basis_points"
+      },
+      "convention": "cumulative_changes",
+      "reference": "historical_origin"
+    },
+    {
+      "id": "covid_2020",
+      "version": 1,
+      "mode": "historical_replay",
+      "input_type": "observed_quarter_average_states",
+      "narrative": "Pandemic contraction, with the previous quarterly-average state as origin.",
+      "rationale": "NBER quarterly peak 2019Q4 and trough 2020Q2; monthly peak February 2020 and trough April 2020. These are quarterly study windows, not daily shock endpoints. https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions",
+      "origin": "2019Q4",
+      "end": "2020Q2",
+      "horizon_quarters": 2,
+      "units": {
+        "equity_price_change": "percent",
+        "yield_2y_change": "basis_points",
+        "yield_10y_change": "basis_points",
+        "credit_spread_proxy_change": "basis_points"
+      },
+      "convention": "cumulative_changes",
+      "reference": "historical_origin"
+    },
+    {
+      "id": "tightening_2022",
+      "version": 1,
+      "mode": "historical_replay",
+      "input_type": "observed_quarter_average_states",
+      "narrative": "Calendar-year monetary tightening from a preceding quarterly-average state.",
+      "rationale": "Federal Reserve statements March 16 and December 14, 2022 establish the policy tightening context; choosing calendar 2022 is a documented study design. https://www.federalreserve.gov/newsevents/pressreleases/monetary20220316a.htm https://www.federalreserve.gov/newsevents/pressreleases/monetary20221214a.htm",
+      "origin": "2021Q4",
+      "end": "2022Q4",
+      "horizon_quarters": 4,
+      "units": {
+        "equity_price_change": "percent",
+        "yield_2y_change": "basis_points",
+        "yield_10y_change": "basis_points",
+        "credit_spread_proxy_change": "basis_points"
+      },
+      "convention": "cumulative_changes",
+      "reference": "historical_origin"
+    },
+    {
+      "id": "illustrative_recession",
+      "version": 1,
+      "mode": "conditional_projection",
+      "input_type": "macro_path",
+      "narrative": "Invented eight-quarter research illustration, not a calibrated forecast or assigned probability.",
+      "rationale": "Recession combines output contraction and rising unemployment with easing inflation/policy; stagflation combines weak output and rising unemployment with persistent inflation and restrictive policy. Magnitudes are illustrative.",
+      "origin": "2026Q2",
+      "horizon_quarters": 8,
+      "units": {
+        "gdp_growth_annualized_pct": "percent_annualized_qoq_real",
+        "unemployment_change_pp": "percentage_points_previous_quarter",
+        "policy_rate_pct": "percent_quarterly_mean",
+        "inflation_yoy_pct": "percent_yoy_quarterly_cpi"
+      },
+      "convention": "macro_levels_and_incremental_unemployment_changes",
+      "reference": "previous_quarter",
+      "quarters": [
+        {
+          "quarter": "2026Q3",
+          "gdp_growth_annualized_pct": -2,
+          "unemployment_change_pp": 0.3,
+          "policy_rate_pct": 3,
+          "inflation_yoy_pct": 2.8
+        },
+        {
+          "quarter": "2026Q4",
+          "gdp_growth_annualized_pct": -3,
+          "unemployment_change_pp": 0.5,
+          "policy_rate_pct": 2,
+          "inflation_yoy_pct": 2.5
+        },
+        {
+          "quarter": "2027Q1",
+          "gdp_growth_annualized_pct": -2,
+          "unemployment_change_pp": 0.5,
+          "policy_rate_pct": 1,
+          "inflation_yoy_pct": 2
+        },
+        {
+          "quarter": "2027Q2",
+          "gdp_growth_annualized_pct": -1,
+          "unemployment_change_pp": 0.4,
+          "policy_rate_pct": 0.5,
+          "inflation_yoy_pct": 1.7
+        },
+        {
+          "quarter": "2027Q3",
+          "gdp_growth_annualized_pct": 0,
+          "unemployment_change_pp": 0.2,
+          "policy_rate_pct": 0.5,
+          "inflation_yoy_pct": 1.5
+        },
+        {
+          "quarter": "2027Q4",
+          "gdp_growth_annualized_pct": 1,
+          "unemployment_change_pp": 0,
+          "policy_rate_pct": 1,
+          "inflation_yoy_pct": 1.5
+        },
+        {
+          "quarter": "2028Q1",
+          "gdp_growth_annualized_pct": 2,
+          "unemployment_change_pp": -0.1,
+          "policy_rate_pct": 1.5,
+          "inflation_yoy_pct": 1.8
+        },
+        {
+          "quarter": "2028Q2",
+          "gdp_growth_annualized_pct": 2,
+          "unemployment_change_pp": -0.1,
+          "policy_rate_pct": 2,
+          "inflation_yoy_pct": 2
+        }
+      ]
+    },
+    {
+      "id": "illustrative_stagflation",
+      "version": 1,
+      "mode": "conditional_projection",
+      "input_type": "macro_path",
+      "narrative": "Invented eight-quarter research illustration, not a calibrated forecast or assigned probability.",
+      "rationale": "Recession combines output contraction and rising unemployment with easing inflation/policy; stagflation combines weak output and rising unemployment with persistent inflation and restrictive policy. Magnitudes are illustrative.",
+      "origin": "2026Q2",
+      "horizon_quarters": 8,
+      "units": {
+        "gdp_growth_annualized_pct": "percent_annualized_qoq_real",
+        "unemployment_change_pp": "percentage_points_previous_quarter",
+        "policy_rate_pct": "percent_quarterly_mean",
+        "inflation_yoy_pct": "percent_yoy_quarterly_cpi"
+      },
+      "convention": "macro_levels_and_incremental_unemployment_changes",
+      "reference": "previous_quarter",
+      "quarters": [
+        {
+          "quarter": "2026Q3",
+          "gdp_growth_annualized_pct": -1,
+          "unemployment_change_pp": 0.2,
+          "policy_rate_pct": 4,
+          "inflation_yoy_pct": 4
+        },
+        {
+          "quarter": "2026Q4",
+          "gdp_growth_annualized_pct": -2,
+          "unemployment_change_pp": 0.3,
+          "policy_rate_pct": 4.5,
+          "inflation_yoy_pct": 5
+        },
+        {
+          "quarter": "2027Q1",
+          "gdp_growth_annualized_pct": -1,
+          "unemployment_change_pp": 0.4,
+          "policy_rate_pct": 5,
+          "inflation_yoy_pct": 6
+        },
+        {
+          "quarter": "2027Q2",
+          "gdp_growth_annualized_pct": 0,
+          "unemployment_change_pp": 0.3,
+          "policy_rate_pct": 5,
+          "inflation_yoy_pct": 6
+        },
+        {
+          "quarter": "2027Q3",
+          "gdp_growth_annualized_pct": 0,
+          "unemployment_change_pp": 0.2,
+          "policy_rate_pct": 5,
+          "inflation_yoy_pct": 5.5
+        },
+        {
+          "quarter": "2027Q4",
+          "gdp_growth_annualized_pct": 1,
+          "unemployment_change_pp": 0.1,
+          "policy_rate_pct": 4.5,
+          "inflation_yoy_pct": 5
+        },
+        {
+          "quarter": "2028Q1",
+          "gdp_growth_annualized_pct": 1,
+          "unemployment_change_pp": 0,
+          "policy_rate_pct": 4,
+          "inflation_yoy_pct": 4
+        },
+        {
+          "quarter": "2028Q2",
+          "gdp_growth_annualized_pct": 2,
+          "unemployment_change_pp": -0.1,
+          "policy_rate_pct": 3.5,
+          "inflation_yoy_pct": 3
+        }
+      ]
+    },
+    {
+      "id": "illustrative_direct_shock",
+      "version": 1,
+      "mode": "direct_shock",
+      "input_type": "factor_shocks",
+      "narrative": "Invented cumulative baseline shock for later pricing diagnostics.",
+      "rationale": "Exercise explicit price-percent and rate/spread-basis-point conventions; no historical or macro model interpretation.",
+      "origin": "2026Q2",
+      "horizon_quarters": 1,
+      "units": {
+        "equity_price_change": "percent",
+        "yield_2y_change": "basis_points",
+        "yield_10y_change": "basis_points",
+        "credit_spread_proxy_change": "basis_points"
+      },
+      "convention": "cumulative_changes",
+      "reference": "baseline",
+      "shocks": {
+        "equity_price_change": -25,
+        "yield_2y_change": 200,
+        "yield_10y_change": 150,
+        "credit_spread_proxy_change": 200
+      }
+    }
+  ]
+}

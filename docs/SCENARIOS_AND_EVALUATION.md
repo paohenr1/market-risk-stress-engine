@@ -1,0 +1,59 @@
+# Scenarios and chronological evaluation
+
+The scenario and evaluation commands support researchers inspecting conditional model behavior. It constructs factor scenarios and evaluates the fixed candidate specifications; it does not price a portfolio, assign scenario probabilities or establish real-time forecast accuracy. All fitted values, observed market paths, errors, coefficients and generated reports stay in ignored local outputs because they contain subscribed-data derivatives.
+
+## Run
+
+Use the prepared proxy data described in [PROXY_DATA.md](PROXY_DATA.md). From the repository root:
+
+```powershell
+.\.venv\Scripts\python.exe -m market_risk evaluate-models --evaluation-config configs/evaluation.toml --config configs/models.toml --foundation configs/foundation.toml --data outputs/proxy/checked --output outputs/evaluation/example
+.\.venv\Scripts\python.exe -m market_risk construct-scenarios --scenarios configs/scenarios.json --config configs/models.toml --foundation configs/foundation.toml --data outputs/proxy/checked --output outputs/scenarios/example
+```
+
+Output directories must be new. CLI output contains only counts, dates, flags, hashes and locations. Read `evaluation.md` locally for selection and benchmark tables, and `evaluation.json` for individual errors, exclusion dates, cumulative equity errors, training/window diagnostics and warning counts. Scenario outputs are in `scenarios.json`. Manifests bind result bytes by SHA-256; evaluation also hashes its readable report. These hashes provide reproducibility checks rather than authenticity guarantees. Model/config/evaluation rules, code fingerprints and source-data hashes are recorded in the results. Numerical evidence is developer validation, not independent financial validation.
+
+## Historical windows
+
+Every factor uses the same quarterly-average origin and end states. The windows were chosen before comparing model errors. They are study designs supported by the cited event chronology, not optimized worst-move dates.
+
+| Preset | Common origin | Common end | Forward quarters | Rationale |
+|---|---|---|---|---|
+| Financial crisis | 2007Q4 | 2009Q2 | 6 | Covers the recession interval associated with the financial crisis; the origin average overlaps recession onset |
+| COVID | 2019Q4 | 2020Q2 | 2 | Previous quarterly activity peak to contraction trough |
+| Monetary tightening | 2021Q4 | 2022Q4 | 4 | Previous year-end average state through calendar 2022 |
+
+NBER reports the recession's monthly dates as December 2007–June 2009, and the pandemic recession as February–April 2020; its quarterly COVID peak and trough are 2019Q4 and 2020Q2. See [NBER chronology](https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions). The Federal Reserve's [March 16, 2022 statement](https://www.federalreserve.gov/newsevents/pressreleases/monetary20220316a.htm) raised its target range to 0.25–0.50%; its [December 14 statement](https://www.federalreserve.gov/newsevents/pressreleases/monetary20221214a.htm) raised it to 4.25–4.50%. Calendar 2022 is our broader study window, not a claim of exact daily policy endpoints.
+
+The proxy amendment uses quarterly averages of three monthly states, superseding the original proposed endpoint-quote convention. Requested/effective quarter labels must match exactly. Calendar quarter-end dates identify periods only; they are not observed simultaneous quote dates. SPY/Treasury common-day and GZ monthly-panel rules remain those of preparation. Missing periods or factors fail construction rather than shifting dates, filling gaps or using different effective endpoints. Each historical path compounds all consecutive average-price changes; yields and GZ changes are differences from the common origin, multiplied by 100 to report basis points. SPY changes are average-state changes, not quarter-end holding returns. Different horizons are reported and must not be treated as equal-duration stresses.
+
+Historical replay and direct shocks require an observed positive finite starting equity_price_usd level, finite yields above -200 percent, and a finite nonnegative spread. They do not require the starting quarter's incoming equity return. Replay still requires every consecutive forward equity change and yield/spread observation; missing quarters are never bridged. Historical factor replay construction is independent of model-fitting feasibility. Conditional reconstruction fits all fixed candidates using only data through the historical origin, then supplies realized macro paths and compares predicted versus observed targets. Its output records eligible pre-event training rows, observed and predicted paths, errors, warnings, residual/VIF/window diagnostics and unavailable evaluation horizons. This exercise has no validation-selected event winner, uses specifications designed retrospectively, and is not claimed as an untouched event holdout or release-time forecast. If 40 eligible pre-event rows or required macros are unavailable, reconstruction is explicitly unavailable while an otherwise valid observed replay can still be constructed. The global validation/holdout protocol below is the separate specification-selection exercise.
+
+## Hypothetical paths and direct shocks
+
+Editable `configs/scenarios.json` contains an eight-quarter recession illustration and an eight-quarter stagflation illustration from 2026Q2. The first combines negative output growth and rising unemployment with falling inflation and easier policy. The second combines weak growth and rising unemployment with persistent inflation and initially restrictive policy. Magnitudes are invented, not calibrated predictions. The implied unemployment path adds declared quarter-to-quarter percentage-point changes to the observed origin level and must remain in [0,100]. Growth rates must remain above -100%; numerical validity alone does not establish economic plausibility.
+
+Conditional scenarios use the same macro definitions as preparation: real annualized quarter-over-quarter GDP growth, quarterly CPI year-over-year inflation, quarterly-average policy rate and incremental unemployment changes. Subsequent market lags are each model's own predictions. All available candidates are returned; this scenario command does not silently choose a winner or apply final-holdout rankings. Fits at a historical or latest-data origin use only that origin's history. The maximum forward length is eight quarters, independent of how far back an origin lies. Marginal training-range and invalid-output warnings from model fitting are retained; they do not establish a jointly validated scenario range.
+
+The direct-shock example specifies cumulative changes from its baseline: equity percent change and yield/spread basis-point changes. This input bypasses model fitting and must not be called macro projection or historical replay. Unknown factors, inconsistent units/reference conventions, duplicate JSON keys, invalid horizons and invalid transformed levels are rejected. Direct shocks have no statistical validation range. For applying replay and direct-shock factors to a fictional portfolio, see [pricing and replay](PRICING_AND_REPLAY.md).
+
+## Evaluation protocol declared before results
+
+`configs/evaluation.toml` fixes selection on one-quarter validation MAE. All 17 original specifications are compared with expanding-history fits and a 60-calendar-quarter rolling window. Rolling windows include their lag warmup row, so at most 59 current target rows are eligible; at least 40 are required. This is a documented window sensitivity, not a relaxed training minimum.
+
+The final 20 calendar quarters are holdout and the preceding 12 are chronological validation, including incomplete rows. Training minima and larger user-configured reservations remain enforced. For the current data, validation is 2018Q3–2021Q2 and holdout is 2021Q3–2026Q2. Each origin fits only history through itself, standardizes within that history, and recursively projects supplied future macro conditions. Earlier observations in a partition become available at subsequent origins, as in a sequential refitting exercise. Earlier holdout targets may train later holdout fits; they never select specifications or windows.
+
+Selection is computed and hashed from validation before the holdout evaluation function is called. At least 12 usable one-quarter validation errors are required per target; if unavailable, selection is unavailable. Ties prefer the ordered methods no-change, mean, AR(1), static, dynamic, then expanding over rolling. The selected method/window is fixed across horizons. Holdout results for all candidates are reported as diagnostics; they must not be used to replace the frozen selection after inspection. Config/specification changes after final evaluation require declaring that the original holdout has been used and obtaining genuinely new evidence before renewed untouched-test claims.
+
+At each horizon 1/4/8, the earliest allowed origin is the quarter immediately preceding the partition: 2018Q2 for validation and 2021Q2 for holdout in the current data. Information through that origin may project the first partition label (2018Q3 or 2021Q3 respectively). Every evaluated future quarter, including every intermediate label in a multiquarter path, must remain inside its own partition. The origin itself need not lie inside the partition. Only supplied future macros enter recursion; market lags after the origin are model predictions, never future observed targets. A 12-quarter validation partition therefore has at most 12/9/5 origin errors respectively, and a 20-quarter holdout has at most 20/17/13, before missingness. Missing intermediate macros or targets exclude the whole path. Comparisons across methods and both training windows share exact origin/endpoint sets within each target/horizon; unavailable candidates exclude that comparison group and are logged. No pairwise favorable-date selection or calendar compression occurs. The eligible training count, exclusions and actual error counts accompany results; calendar reservations are not promises of equally many usable observations.
+
+Errors are predicted minus actual: equity percentage points of the average-price change in the horizon's final quarter, and yield/spread basis points of endpoint levels. An additional equity summary compounds all incremental average-price changes from origin through horizon and reports cumulative error in percentage points. MAE, RMSE, bias, worst absolute error and empirical signed-error q10/median/q90 are reported by partition/target/method/window/horizon. Quantiles use linear interpolation on ordered historical errors. Overlapping paths make errors dependent; the error range is descriptive historical uncertainty, not a prediction interval or scenario probability. Extrapolation and invalid-pricing quarter counts expose path failures; there is no clipping or removal of finite poor results. Residual/VIF/parameter-window diagnostics are saved at each fitted origin. Candidate and training-window errors quantify specification/window sensitivity without requiring the challenger to win.
+
+## Future independent challenge
+
+- Reproduce sources, transformations and vintage assumptions; challenge SPY/GZ proxy and average-state interpretation.
+- Independently implement QR/recursion, compare coefficients and check rate/error-unit conversions.
+- Challenge sample size, dependence, structural breaks, missingness and common-comparison exclusions.
+- Verify selection chronology and holdout reuse history, especially after specification changes.
+- Challenge realized-macro conditioning, extrapolation and economic plausibility; compare with true release-time forecasts only with appropriate vintages.
+- Assess longer histories, alternative spread definitions, pricing mappings and scenario magnitudes before operational use.

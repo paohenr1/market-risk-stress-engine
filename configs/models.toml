@@ -1,0 +1,7 @@
+schema_version = 1
+dataset_id = "spy_gz_monthly_average_v1"
+# Contemporaneous macro paths are supplied conditions, not forecasts.
+credit_predictors = ["gdp_growth_annualized_pct", "unemployment_change_pp"]
+equity_predictors = ["gdp_growth_annualized_pct"]
+yield_predictors = ["policy_rate_pct", "inflation_yoy_pct"]
+rank_tolerance = 1e-10

@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "scope": "Saved coverage observations; not a current access or licensing guarantee",
+  "fred_export_probe": {
+    "schema_version": 1,
+    "purpose": "coverage_probe_not_production_pipeline",
+    "warning": "Counts are marginal raw coverage, not complete aligned training samples or release-time availability.",
+    "series": [
+      {
+        "series_id": "GDPC1",
+        "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GDPC1",
+        "status": "retrieved",
+        "retrieved_at_utc": "2026-10-09T19:39:40.604382+00:00",
+        "sha256": "5e235cef633b1033da0967311efa89a47845f42e9d6ad8d60b4babed32ae6f08",
+        "saved_path": "data/raw/feasibility/GDPC1.csv",
+        "first_valid_date": "1947-01-01",
+        "last_valid_date": "2026-04-01",
+        "rows": 318,
+        "missing_values": 0,
+        "pre_event_quarters_with_any_observation": {
+          "2008-01-01": 244,
+          "2020-01-01": 292,
+          "2022-01-01": 300
+        },
+        "vintage": "latest_revised_export_not_point_in_time"
+      },
+      {
+        "series_id": "UNRATE",
+        "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE",
+        "status": "retrieved",
+        "retrieved_at_utc": "2026-10-09T19:39:40.649415+00:00",
+        "sha256": "621ff6fadf50910cb7a21ee20ba610c247cb043b29b4e05c4c1a72fadca2a06c",
+        "saved_path": "data/raw/feasibility/UNRATE.csv",
+        "first_valid_date": "1948-01-01",
+        "last_valid_date": "2026-09-01",
+        "rows": 945,
+        "missing_values": 1,
+        "pre_event_quarters_with_any_observation": {
+          "2008-01-01": 240,
+          "2020-01-01": 288,
+          "2022-01-01": 296
+        },
+        "vintage": "latest_revised_export_not_point_in_time"
+      },
+      {
+        "series_id": "CPIAUCSL",
+        "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",
+        "status": "retrieved",
+        "retrieved_at_utc": "2026-10-09T19:39:40.722687+00:00",
+        "sha256": "f8ecddf53a9a9a74dda92c2c4204e6039466fcb744bc74171b73b5f6aac48119",
+        "saved_path": "data/raw/feasibility/CPIAUCSL.csv",
+        "first_valid_date": "1947-01-01",
+        "last_valid_date": "2026-08-01",
+        "rows": 956,
+        "missing_values": 1,
+        "pre_event_quarters_with_any_observation": {
+          "2008-01-01": 244,
+          "2020-01-01": 292,
+          "2022-01-01": 300
+        },
+        "vintage": "latest_revised_export_not_point_in_time"
+      },
+      {
+        "series_id": "FEDFUNDS",
+        "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS",
+        "status": "retrieved",
+        "retrieved_at_utc": "2026-10-09T19:39:40.765367+00:00",
+        "sha256": "74680b2d09bb28f90fb30c1c09e93ac2d443de1b7345ba5a9112b3eca9be0a25",
+        "saved_path": "data/raw/feasibility/FEDFUNDS.csv",
+        "first_valid_date": "1954-07-01",
+        "last_valid_date": "2026-09-01",
+        "rows": 867,
+        "missing_values": 0,
+        "pre_event_quarters_with_any_observation": {
+          "2008-01-01": 214,
+          "2020-01-01": 262,
+          "2022-01-01": 270
+        },
+        "vintage": "latest_revised_export_not_point_in_time"
+      },
+      {
+        "series_id": "DGS2",
+        "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2",
+        "status": "retrieved",
+        "retrieved_at_utc": "2026-10-09T19:39:40.860580+00:00",
+        "sha256": "fa397e63e03fb3ffb40c41a4aa7c52c398f2216b7fba803358d40a1e075bbc70",
+        "saved_path": "data/raw/feasibility/DGS2.csv",
+        "first_valid_date": "1976-06-01",
+        "last_valid_date": "2026-10-07",
+        "rows": 13137,
+        "missing_values": 552,
+        "pre_event_quarters_with_any_observation": {
+          "2008-01-01": 127,
+          "2020-01-01": 175,
+          "2022-01-01": 183
+        },
+        "vintage": "latest_revised_export_not_point_in_time"
+      },
+      {
+        "series_id": "DGS10",
+        "source_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10",
+        "status": "retrieved",
+        "retrieved_at_utc": "2026-10-09T19:39:40.955997+00:00",
+        "sha256": "bac8ffccad9e94fd2d032d99d72c37759e7c6ab5488a9640880268e04c6415fe",
+        "saved_path": "data/raw/feasibility/DGS10.csv",
+        "first_valid_date": "1962-01-02",
+        "last_valid_date": "2026-10-07",
+        "rows": 16897,
+        "missing_values": 720,
+        "pre_event_quarters_with_any_observation": {
+          "2008-01-01": 184,
+          "2020-01-01": 232,
+          "2022-01-01": 240
+        },
+        "vintage": "latest_revised_export_not_point_in_time"
+      }
+    ]
+  },
+  "proxy_preparation": {
+    "dataset_id": "spy_gz_monthly_average_v1",
+    "proxy_snapshot_id": "4e3c48875783ea6f6c1d6e6d84856c6755d79d0ad756046d6498297e6788bbf5",
+    "fred_snapshot_id": "b39d9139e1c6efe4c34787bb0a222db3de87abda001d03d227454bec3beb0bf8",
+    "fred_vintage_date": "2026-10-09",
+    "proxy_retrieved_at_utc": "2026-10-13T13:17:02.607249+00:00",
+    "csv_sha256": "aaa37529da35a93850e013af155634d049c2d89e9a04579a0dcde2744a2176b3",
+    "calendar_quarters": 134,
+    "complete_proxy_quarters": 128
+  }
+}

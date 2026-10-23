@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.firecrawl/
+.env
+data/raw/
+outputs/
+!outputs/.gitkeep
+
+# Local acquisition/authentication records; retain only curated verification evidence.
+docs/evidence/*
+!docs/evidence/validation-summary.json
+!docs/evidence/source-coverage.json

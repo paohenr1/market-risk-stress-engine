@@ -1,0 +1,10 @@
+schema_version = 1
+dataset_id = "spy_gz_monthly_average_v1"
+observation_start = 1993-01-01
+observation_end = 2026-06-30
+minimum_common_days_per_month = 15
+maximum_excluded_union_day_fraction = 0.10
+equity_definition = "SPY_split_only_price_proxy"
+credit_definition = "GZ_nonfinancial_corporate_spread_proxy"
+market_alignment = "mean_of_three_monthly_means"
+use_scope = "local_internal_only"

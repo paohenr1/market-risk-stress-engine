@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-23",
+  "implementation_head": "bcb0afe4104f928edfefd18116566add0056cc2c",
+  "gate_head": "76c563c71a7efe557644695bf16c05b3fd105b9d",
+  "local_full_suite_tests": 91,
+  "local_full_suite_skips": 0,
+  "independent_testing": "focused tests and live CLI; not a second broad suite",
+  "priced_scenarios": 6,
+  "priced_states": 29,
+  "pages": 14,
+  "csv_exhibits": 7,
+  "charts": 3,
+  "report_manifest_sha256": "aa56697b595131c0fdb96bd4ccda478a1bab475642040de6e28c8f37277d6dda",
+  "pdf_sha256": "03b8cdb011eeba48c2ec4471cbbb9f7886496bc7b0191d7baaee0240c187786d",
+  "visual_review": {
+    "basis": "redacted actual-data layouts and unrestricted synthetic charts; delivered PDF byte-identical to reviewed PDF",
+    "actual_protected_numerical_content_viewed": false,
+    "out_of_bounds_words": 0,
+    "overlapping_word_pairs": 0,
+    "run_footer_pages": 14
+  },
+  "offline_reproduction_passed": true,
+  "remote_ci_verified": false,
+  "financial_validation_claimed": false,
+  "original_index_ig_oas_ready": false,
+  "scope": "Completed implementation before documentation-only repository cleanup",
+  "python_version": "3.14.8",
+  "empirical_artifacts_in_source_package": false
+}

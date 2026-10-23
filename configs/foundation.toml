@@ -1,0 +1,19 @@
+schema_version = 1
+project_name = "Market Risk Variable Projection and Portfolio Stress Testing"
+currency = "USD"
+valuation_mode = "fixed_time"
+equity_return_convention = "price_simple"
+data_access_policy = "official_structured_first"
+firecrawl_requires_credit_approval = true
+
+[evaluation]
+# These are predeclared rules, not claims that the available data satisfy them.
+minimum_training_quarters = 40
+minimum_validation_quarters = 12
+final_holdout_quarters = 20
+horizons_quarters = [1, 4, 8]
+
+[tolerances]
+# Portfolio reconciliation and numerical reproduction, not model-accuracy targets.
+absolute_usd = 0.01
+relative = 1e-10

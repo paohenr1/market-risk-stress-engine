@@ -1,0 +1,5 @@
+schema_version = 1
+# Selection uses one-quarter validation MAE only, before holdout is calculated.
+selection_horizon = 1
+selection_metric = "mae"
+rolling_calendar_quarters = 60

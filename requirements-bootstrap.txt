@@ -1,0 +1,2 @@
+# Pinned build tooling. The calculation engine uses the standard library.
+setuptools==80.9.0

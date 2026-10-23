@@ -1,0 +1,7 @@
+# Versioned preparation policy. No secrets belong in this file.
+schema_version = 1
+observation_start = 1976-01-01
+observation_end = 2026-06-30
+vintage_date = 2026-10-09
+endpoint_max_age_days = 5
+series = ["GDPC1", "UNRATE", "CPIAUCSL", "FEDFUNDS", "DGS2", "DGS10"]

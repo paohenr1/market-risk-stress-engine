@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "dataset_id": "spy_gz_monthly_average_v1",
+  "portfolio_id": "fictional_usd_v1",
+  "fictional": true,
+  "currency": "USD",
+  "valuation_date": "2026-06-30",
+  "baseline_quarter": "2026Q2",
+  "target_value_usd": 1000000,
+  "normalized_equity_price": 100,
+  "conventions": {
+    "valuation": "fixed_time",
+    "discount_curve": "two_node_par_as_zero_proxy",
+    "day_count": "actual_365_fixed",
+    "coupon_frequency": 2,
+    "coupon_dates": "unadjusted",
+    "accrual": "actual_elapsed_over_coupon_period",
+    "spread": "gz_percent_as_continuous_discount_margin_proxy",
+    "holdings": "fractional_unrounded_fixed",
+    "value": "dirty",
+    "coupon_on_valuation_date": "already_paid_excluded"
+  },
+  "positions": [
+    {
+      "id": "broad_equity",
+      "kind": "equity",
+      "weight": 0.4
+    },
+    {
+      "id": "short_government",
+      "kind": "government_bond",
+      "weight": 0.2,
+      "coupon_pct": 4.0,
+      "previous_coupon": "2026-06-30",
+      "coupon_dates": [
+        "2026-12-30",
+        "2027-06-30",
+        "2027-12-30",
+        "2028-06-30"
+      ]
+    },
+    {
+      "id": "long_government",
+      "kind": "government_bond",
+      "weight": 0.2,
+      "coupon_pct": 4.5,
+      "previous_coupon": "2026-06-30",
+      "coupon_dates": [
+        "2026-12-30",
+        "2027-06-30",
+        "2027-12-30",
+        "2028-06-30",
+        "2028-12-30",
+        "2029-06-30",
+        "2029-12-30",
+        "2030-06-30",
+        "2030-12-30",
+        "2031-06-30",
+        "2031-12-30",
+        "2032-06-30",
+        "2032-12-30",
+        "2033-06-30",
+        "2033-12-30",
+        "2034-06-30",
+        "2034-12-30",
+        "2035-06-30",
+        "2035-12-30",
+        "2036-06-30"
+      ]
+    },
+    {
+      "id": "corporate_proxy",
+      "kind": "corporate_bond",
+      "weight": 0.15,
+      "coupon_pct": 5.0,
+      "previous_coupon": "2026-06-30",
+      "coupon_dates": [
+        "2026-12-30",
+        "2027-06-30",
+        "2027-12-30",
+        "2028-06-30",
+        "2028-12-30",
+        "2029-06-30",
+        "2029-12-30",
+        "2030-06-30",
+        "2030-12-30",
+        "2031-06-30"
+      ]
+    },
+    {
+      "id": "cash",
+      "kind": "cash",
+      "weight": 0.05
+    }
+  ],
+  "sensitivity": {
+    "bump_bp": 1,
+    "parallel_shifts_bp": [
+      -200,
+      -25,
+      -1,
+      0,
+      1,
+      25,
+      200
+    ],
+    "nonparallel_shifts_bp": [
+      [
+        100,
+        -100
+      ],
+      [
+        -100,
+        100
+      ]
+    ],
+    "zero_proxy_overlays_bp": [
+      -25,
+      25
+    ]
+  }
+}
