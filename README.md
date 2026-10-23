@@ -17,7 +17,11 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-The calculation engine uses only the Python standard library. Build tooling is pinned separately. Verification used Python 3.14.8; other supported versions have not been checked. Tests use fictional fixtures and need no API keys or subscribed data. Three renderer tests are skipped unless the optional report dependencies are installed. See [verification](docs/VALIDATION_STATUS.md) for the tested scope and remaining gaps.
+The calculation engine uses only the Python standard library. Build tooling is pinned separately. The recorded local verification used Python 3.14.8. Tests use fictional fixtures and need no API keys or subscribed data. Three renderer tests are skipped unless the optional report dependencies are installed. See [verification](docs/VALIDATION_STATUS.md) for the tested scope and remaining gaps.
+
+## Automated checks
+
+The [CI workflow](.github/workflows/ci.yml) runs Python 3.11–3.14 on Ubuntu 24.04 and Windows 2025 for pushes to `main`, pull requests targeting `main` and manual runs. Each job installs the pinned optional renderer, checks dependencies and CLI configuration, runs the tests without accepting skips, and compiles the Python modules. It uses fictional fixtures and requires no data-provider credentials or subscribed inputs. Repository access is read-only, and no test artifacts are uploaded. See [GitHub Actions](https://github.com/paohenr1/market-risk-stress-engine/actions/workflows/ci.yml) for hosted results; a workflow definition alone is not evidence of a passing run.
 
 ## Acquire and prepare data
 
@@ -57,7 +61,7 @@ The PDF is `outputs/reports/research/rendered/technical_report.pdf`. Reports, ch
 
 Start with the [code walkthrough](docs/CODE_WALKTHROUGH.md), then read the guides for [data](docs/PROXY_DATA.md), [models](docs/PROJECTION_MODELS.md), [evaluation and scenarios](docs/SCENARIOS_AND_EVALUATION.md), [pricing](docs/PRICING_AND_REPLAY.md), [saved runs](docs/INTEGRATED_EXECUTION.md) and [reporting](docs/REPORTING.md). The [specification](SPECIFICATION.md) records the research scope and acceptance criteria.
 
-The study conditions on revised data and supplied future macro paths; it does not establish real-time forecast accuracy. In the evaluated dataset, selected AR(1)/no-change models omit macro predictors, so the recession and stagflation illustrations produce identical conditional paths. Pricing uses a two-node par-as-zero approximation, fixed time and fixed holdings. See the [limitations register](docs/LIMITATIONS.md) for the full boundaries. Software checks do not establish independent financial validation, regulatory compliance or production readiness. Remote CI has not been verified.
+The study conditions on revised data and supplied future macro paths; it does not establish real-time forecast accuracy. In the evaluated dataset, selected AR(1)/no-change models omit macro predictors, so the recession and stagflation illustrations produce identical conditional paths. Pricing uses a two-node par-as-zero approximation, fixed time and fixed holdings. See the [limitations register](docs/LIMITATIONS.md) for the full boundaries. Software checks do not establish independent financial validation, regulatory compliance or production readiness.
 
 ## License
 

@@ -25,10 +25,16 @@ Saved empirical inputs produced six priced scenarios and 29 states with successf
 
 PDF geometry and value binding were checked programmatically. Redacted actual-data page layouts and unrestricted synthetic charts were visually inspected. Protected numerical text and actual-data plotted geometry were not visually read. Rendering success alone is not a complete visual-review claim.
 
+## Automated checks
+
+The [CI workflow](../.github/workflows/ci.yml) defines eight jobs across Python 3.11–3.14, Ubuntu 24.04 and Windows 2025. Jobs install pinned build/report dependencies and the project, check dependency consistency and public commands, run all discovered tests with skips treated as failures, and compile Python modules. Tests use fictional fixtures; no subscribed input, provider credential or output-artifact upload is required. Actions are pinned to full commit identifiers and repository access is read-only.
+
+The earlier local checks above do not establish hosted matrix results. Consult the [workflow runs](https://github.com/paohenr1/market-risk-stress-engine/actions/workflows/ci.yml) for the checked commit and individual job outcomes. A workflow definition, queued run or skipped job is not a pass.
+
 ## Remaining gaps
 
 - Source snapshots and derived numerical artifacts are excluded from this repository. Pattern-based credential checks are not a complete security audit.
-- Remote CI has not run; push and pull-request stages were skipped.
+- Earlier implementation verification skipped push, pull-request and remote CI stages. Hosted workflow results are separate from those local records.
 - Git whitespace checks are not dedicated static analysis.
 - The exact equity-index/IG-OAS dataset remains unavailable.
 - Revised-data conditioning does not establish historical release-time forecasting accuracy.

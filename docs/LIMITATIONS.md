@@ -19,4 +19,4 @@ These limitations remain open by design or because evidence is unavailable. A su
 | L13 | No scenario probabilities | No expected loss, probability ranking or regulatory capital result | A separate probability model and validation would be needed |
 | L14 | Saved source/runtime required for numerical reproduction | No container or cross-runtime equivalence guarantee | Retain matching source/runtime; version upgrades require new verification |
 | L15 | Provider rights are separate from local access | Numerical inputs, charts and derived reports are not public deliverables by default | Establish redistribution rights before distribution |
-| L16 | Developer verification only | No independent financial validation, operational deployment or remote CI pass | Independent challenge and governance are required before operational use |
+| L16 | Software verification is distinct from financial validation | Tests and CI do not establish independent financial validation or operational fitness | Independent challenge and governance are required before operational use |

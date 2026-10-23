@@ -12,7 +12,7 @@ See [validation status](VALIDATION_STATUS.md) for verification evidence. This re
 | V06 | Historical starting state unnecessarily depended on incoming equity return | Resolved implementation issue | Positive price and valid observed yield/spread levels suffice at origin; forward gaps remain unavailable |
 | V07 | Conditional integration and saved-run reproduction absent | Resolved implementation issue | Saved-run execution checks with frozen selections and offline reruns |
 | V08 | Invented macro paths coincide under selected models | Disclosed empirical finding | Selected AR/no-change specifications omit macro predictors; no fallback manufactured |
-| V10 | Dedicated static lint and remote CI not configured/executed | Open verification limitation | Git whitespace is the configured lint step; remote push/PR/CI remain skipped |
+| V10 | Dedicated static analysis absent; hosted results separate from local verification | Open verification limitation | Git whitespace is not static analysis. The CI workflow defines a cross-version/OS matrix; its individual run results must be checked separately |
 | V11 | Financial validity and omitted risks unresolved | Open research limitation | Limitations register and independent challenge required before any operational use |
 | V12 | Report generation, CSV binding and PDF layout | Resolved implementation issue | Report checks passed; full local suite, independent CLI/value-binding/geometry checks, redacted actual layouts and synthetic chart review recorded |
 | V13 | Report wording/chart labels assumed default configuration | Resolved implementation issue | Captured assumptions/IDs, government-only selection, fractional coordinates and one USD-thousands scale verified by report tests and review |
