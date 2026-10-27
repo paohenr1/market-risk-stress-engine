@@ -4,6 +4,10 @@ A Python research pipeline for studying market-variable projections and fixed-ti
 
 The implemented dataset uses SPY split-only price changes and the Federal Reserve's GZ nonfinancial corporate spread, together with FRED macroeconomic and Treasury data. SPY is an ETF price proxy; GZ is not investment-grade-only option-adjusted spread. Quarterly-average market states are not simultaneous quotes or realized holding-period returns. The originally intended equity-index/IG-OAS dataset remains unavailable.
 
+## Synthetic demonstration
+
+Explore scenario comparisons, portfolio attribution and model evaluation in the [synthetic dashboard](https://paohenr1.github.io/market-risk-stress-engine/demo/). All inputs and results in the demo are fictional. It demonstrates software behavior, not performance on real market data. See [how the demo is generated](docs/DEMO.md) for offline use and reproduction.
+
 ## Install and test
 
 From the repository root in PowerShell, with Python 3.11 or newer:
@@ -56,6 +60,18 @@ For PDF and SVG output, install the optional renderer and run:
 ```
 
 The PDF is `outputs/reports/research/rendered/technical_report.pdf`. Reports, charts and other numerical derivatives remain under ignored local directories and require applicable redistribution rights before sharing.
+
+## Interactive dashboard
+
+Generate a standalone HTML dashboard from a saved run. No API calls, model fitting or repricing are performed:
+
+```powershell
+.\.venv\Scripts\python.exe -m market_risk generate-dashboard --run outputs/runs/research --output outputs/dashboards/research
+```
+
+Open `outputs/dashboards/research/index.html` in a modern browser. Use a new output directory for each export. The dashboard provides scenario comparisons, a quarter inspector, holding and factor attribution, model selection and validation summaries. It explicitly identifies selected models that omit macro predictors and conditional paths that coincide.
+
+The viewer verifies the saved bundle and records its identity in `dashboard_manifest.json`. It can display archived runs from an earlier source version; displaying a run does not reproduce its calculations or independently validate the model. The HTML embeds numerical results, works offline and remains a local derivative subject to the source data's redistribution terms.
 
 ## Methods and limitations
 

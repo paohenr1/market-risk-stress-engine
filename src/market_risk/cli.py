@@ -21,6 +21,7 @@ from market_risk.pricing import load_portfolio
 from market_risk.valuation import save_valuation
 from market_risk.execution import save_run, reproduce_run
 from market_risk.reporting import save_report
+from market_risk.dashboard import save_dashboard
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -86,6 +87,9 @@ def main(argv: list[str] | None = None) -> int:
     report = commands.add_parser("generate-report", help="Generate run-bound technical report source and CSV exhibits locally")
     report.add_argument("--run", type=Path, required=True)
     report.add_argument("--output", type=Path, required=True)
+    dashboard = commands.add_parser("generate-dashboard", help="Create an offline local dashboard from a verified saved run")
+    dashboard.add_argument("--run", type=Path, required=True)
+    dashboard.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
         if args.command == "check-config":
@@ -122,6 +126,8 @@ def main(argv: list[str] | None = None) -> int:
             result = reproduce_run(args.run, args.output)
         elif args.command == "generate-report":
             result = save_report(args.run, args.output)
+        elif args.command == "generate-dashboard":
+            result = save_dashboard(args.run, args.output)
         else:
             report = prepare_proxy(args.snapshot, args.fred_snapshot, load_proxy_config(args.config),
                                    load_data_config(args.fred_config), args.output)
